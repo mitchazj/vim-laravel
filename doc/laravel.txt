@@ -15,6 +15,7 @@ Some features include:
 
   * The |:Artisan| command wraps artisan with intelligent completion.
   * Includes projections for projectionist.vim.
+  * Use |:Homestead| to send commands over SSH to your development VM.
   * Use |:Console| to fire up a REPL (artisan tinker).
 
 This plug-in is only available if 'compatible' is not set.
@@ -24,6 +25,21 @@ COMMANDS                                                    *laravel-commands*
 
 :Artisan[!] [arguments]                                             *:Artisan*
   Invoke Artisan with [arguments] (with intelligent completion).
+
+:Homestead {cmd}                                                  *:Homestead*
+  Invoke shell {cmd} on the Homestead VM over SSH.
+
+
+:Homestead
+  Start an interactive SSH session on the Homestead VM.
+
+
+:Homestead! [arguments]
+  Invoke Vagrant with [arguments] in the context of the Homestead directory on
+  the host machine. For example, to start the VM:
+>
+      :Homestead! up
+<
 
 ==============================================================================
 ABOUT                                                          *laravel-about*

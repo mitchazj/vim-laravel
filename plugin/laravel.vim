@@ -9,6 +9,7 @@
 "
 " * The |:Artisan| command wraps artisan with intelligent completion.
 " * Includes projections for projectionist.vim.
+" * Use |:Homestead| to send commands over SSH to your development VM.
 " * Use |:Console| to fire up a REPL (artisan tinker).
 "
 " This plug-in is only available if 'compatible' is not set.

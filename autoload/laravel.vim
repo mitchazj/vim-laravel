@@ -134,8 +134,14 @@ function! s:app_views_path(...) dict abort
   return join([self._root, 'resources/views'] + a:000, '/')
 endfunction
 
+""
+" Get path to source root in Homestead VM.
+function! s:app_homestead_root() dict abort
+  return laravel#homestead#root(self._root)
+endfunction
+
 call s:add_methods('app', ['glob', 'has_dir', 'has_file', 'has_path'])
-call s:add_methods('app', ['path', 'src_path', 'config_path', 'migrations_path', 'find_migration', 'expand_migration', 'views_path'])
+call s:add_methods('app', ['path', 'src_path', 'config_path', 'migrations_path', 'find_migration', 'expand_migration', 'views_path', 'homestead_root'])
 
 ""
 " Detect app's namespace
@@ -468,6 +474,21 @@ function! laravel#buffer_commands() abort
   " Invoke Artisan with [arguments] (with intelligent completion).
   command! -buffer -bang -bar -nargs=* -complete=customlist,laravel#artisan#complete
         \ Artisan execute laravel#artisan#exec(<q-bang>, <f-args>)
+
+  ""
+  " @command Homestead {cmd}
+  " Invoke shell {cmd} on the Homestead VM over SSH.
+  "
+  " @command Homestead
+  " Start an interactive SSH session on the Homestead VM.
+  "
+  " @command Homestead! [arguments]
+  " Invoke Vagrant with [arguments] in the context of the Homestead directory
+  " on the host machine. For example, to start the VM: >
+  "     :Homestead! up
+  " <
+  command! -buffer -bang -bar -nargs=* -complete=shellcmd
+        \ Homestead execute laravel#homestead#exec(<q-bang>, <f-args>)
 endfunction
 
 ""
